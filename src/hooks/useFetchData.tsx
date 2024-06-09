@@ -1,37 +1,52 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 type TData = {
-  id: number;
-  name: string;
-  city: string;
-  email: string;
-  joined: string;
-  purchasedAmount: number;
-  member: string;
+   id: number;
+   name: string;
+   city: string;
+   email: string;
+   joined: string;
+   purchasedAmount: number;
+   member: string;
 };
 
-export function usFetchData() {
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState<null | TData[]>();
+export function useFetchData(url: string, currentPage: number, pages: number, setPages: Dispatch<SetStateAction<number>>) {
+   const [loading, setLoading] = useState(true);
+   const [error, setError] = useState<string | null>(null);
+   const [data, setData] = useState<[] | TData[]>([]);
 
-  useEffect(() => {
-    async function fetchData() {
-      // todo: vite env local
-      const res: TData[] = await axios.get("http://localhost:3000/customers");
+   useEffect(() => {
+      async function fetchData() {
+         try {
+            const res = await fetch(url);
 
-      console.log("fff", res);
+            if (res.ok) {
+               const jsonData = await res.json();
 
-      setData(res);
+               if (Array.isArray(jsonData)) {
+                  setData(jsonData);
+               } else {
+                  setData(jsonData.data);
+                  setPages(jsonData.pages);
+               }
 
-      setLoading(false);
-    }
+               setLoading(false);
+            }
+         } catch (e: unknown) {
+            setError("An Error occurred!");
+            setData([]);
+         } finally {
+            setLoading(false);
+         }
+      }
 
-    fetchData();
-  }, []);
+      fetchData();
+   }, [currentPage, pages]);
 
-  return {
-    loading,
-    data,
-  };
+   return {
+      loading,
+      data,
+      error,
+      setData,
+   };
 }

@@ -2,104 +2,112 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+   color-scheme: dark light;
+}
+
 @layer base {
-  /* system default */
-  @media (prefers-color-scheme: dark) {
-    :root {
+   /* system default */
+   @media (prefers-color-scheme: dark) {
+      :root {
+         --color-main: 0 0 0;
+         --color-secondary: 36 37 41;
+         --color-border: 55 65 81;
+         --color-text-main: 231 229 228;
+         --color-text-secondary: 36 37 41;
+         --color-text-hover: 214 211 209;
+         --color-text-active: 255 255 255;
+      }
+      svg {
+         stroke: white;
+      }
+
+      main {
+         background-color: black;
+      }
+   }
+
+   @media (prefers-color-scheme: light) {
+      :root {
+         --color-main: 255 255 255;
+         --color-secondary: 231 229 228;
+         --color-border: 214 211 209;
+         --color-text-main: 0 0 0;
+         --color-text-secondary: 36 37 41;
+         --color-text-hover: 55 65 81;
+         --color-text-active: 255 255 255;
+
+         color-scheme: light;
+      }
+      main {
+         background-color: white;
+      }
+   }
+
+   /* toggle */
+   :root[data-theme="dark"] {
       --color-main: 0 0 0;
       --color-secondary: 36 37 41;
       --color-border: 55 65 81;
       --color-text-main: 231 229 228;
-      --color-text-secondary: 36 37 41;
+      --color-text-secondary: 55 65 81;
       --color-text-hover: 214 211 209;
       --color-text-active: 255 255 255;
-    }
-    svg {
-      stroke: white;
-    }
 
-    main {
-      background-color: black;
-    }
-  }
+      ::-webkit-calendar-picker-indicator {
+         filter: invert(1);
+      }
+      svg {
+         stroke: white;
+      }
 
-  @media (prefers-color-scheme: light) {
-    :root {
+      main {
+         background-color: black;
+      }
+   }
+
+   :root[data-theme="light"] {
       --color-main: 255 255 255;
       --color-secondary: 231 229 228;
       --color-border: 214 211 209;
       --color-text-main: 0 0 0;
-      --color-text-secondary: 36 37 41;
-      --color-text-hover: 55 65 81;
+      --color-text-secondary: 55 65 81;
+      --color-text-hover: 112 106 106;
       --color-text-active: 255 255 255;
-    }
-    main {
-      background-color: white;
-    }
-  }
 
-  /* toggle */
-  :root[data-theme="dark"] {
-    --color-main: 0 0 0;
-    --color-secondary: 36 37 41;
-    --color-border: 55 65 81;
-    --color-text-main: 231 229 228;
-    --color-text-secondary: 55 65 81;
-    --color-text-hover: 214 211 209;
-    --color-text-active: 255 255 255;
-
-    ::-webkit-calendar-picker-indicator {
-      filter: invert(1);
-    }
-    svg {
-      stroke: white;
-    }
-
-    main {
-      background-color: black;
-    }
-  }
-
-  :root[data-theme="light"] {
-    --color-main: 255 255 255;
-    --color-secondary: 231 229 228;
-    --color-border: 214 211 209;
-    --color-text-main: 0 0 0;
-    --color-text-secondary: 55 65 81;
-    --color-text-hover: 112 106 106;
-    --color-text-active: 255 255 255;
-
-    ::-webkit-calendar-picker-indicator {
-      filter: invert(0);
-    }
-
-    svg {
-      stroke: black;
-    }
-    input {
       color-scheme: light;
-    }
 
-    main {
-      background-color: white;
-    }
-  }
+      ::-webkit-calendar-picker-indicator {
+         filter: invert(0);
+      }
+
+      svg {
+         stroke: black;
+      }
+      input {
+         color-scheme: light;
+      }
+
+      main {
+         background-color: white;
+      }
+   }
 }
 
 input {
-  color-scheme: light dark;
+   color-scheme: light dark;
 }
 
 ::-webkit-calendar-picker-indicator {
-  background-image: url("/calendar.svg");
+   background-image: url("/calendar.svg");
 }
 
 ::-webkit-calendar-picker-indicator {
-  filter: invert(1);
+   filter: invert(1);
 }
 
 @media (prefers-color-scheme: light) {
-  ::-webkit-calendar-picker-indicator {
-    filter: invert(0);
-  }
+   ::-webkit-calendar-picker-indicator {
+      filter: invert(0);
+   }
 }

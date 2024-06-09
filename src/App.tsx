@@ -1,19 +1,24 @@
-import { usFetchData } from "./hooks/useFetchData";
-import { Header, Table, SearchOperations, Skeleton } from "./components/index";
-import { data as d } from "./data/data";
+import { useData } from "./context/context";
+import { Header, Table, SearchOperations, Skeleton, ErrorMessage } from "./components/index";
 
 function App() {
-  const { loading, data } = usFetchData();
+   const { data, error, loading } = useData();
 
-  console.log(data);
-  return (
-    <main className="min-h-screen text-text-main">
-      <Header />
-      <div className="z-50 max-w-6xl mx-auto -translate-y-[125px]">
-        {loading ? <Skeleton /> : <Table data={d} />}
-      </div>
-    </main>
-  );
+   return (
+      <main className="min-h-screen text-text-main overflow-x-hidden">
+         <Header />
+         {error ? (
+            <ErrorMessage />
+         ) : loading ? (
+            <Skeleton />
+         ) : (
+            <div className="z-50 max-w-6xl mx-auto -translate-y-[125px]">
+               <SearchOperations />
+               <Table data={data} />
+            </div>
+         )}
+      </main>
+   );
 }
 
 export default App;
