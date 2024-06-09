@@ -63,6 +63,7 @@ function Table({ data }: { data: TData[] }) {
               <div className="w-full flex items-center justify-center gap-5">
                 {[...new Array(5).keys()].map((k) => (
                   <div
+                    key={k}
                     style={k === 2 ? { border: "1px solid gray" } : {}}
                     className="p-1 cursor-pointer"
                   >
