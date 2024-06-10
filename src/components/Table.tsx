@@ -57,7 +57,7 @@ function Table({ data }: { data: TData[] | [] }) {
                            );
                         })}
                      </div>
-                     <button className="hover:text-white" onClick={() => setCurrentPage((cp) => cp + 1)}>
+                     <button className="hover:text-white" onClick={() => setCurrentPage((cp) => (cp >= pages ? cp : cp + 1))}>
                         next
                      </button>
                   </div>
