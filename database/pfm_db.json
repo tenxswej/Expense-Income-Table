@@ -1,0 +1,53 @@
+{
+   "expenses": [
+      {
+         "id": 1,
+         "title": "Dream gaming chair",
+         "date": "12/12/12",
+         "category": "furniture",
+         "tags": ["hobby", "work"],
+         "amount": 23213,
+         "receipt": "https://www.img-url.com",
+         "remark": "Say something here about your recent purchase.",
+         "archive": false,
+         "meta": {
+            "color": "#ffff",
+            "icon": "💸"
+         }
+      }
+   ],
+   "income": [
+      {
+         "id": 1,
+         "title": "Dream gaming chair",
+         "date": "12/12/12",
+         "category": "furniture",
+         "tags": ["hobby", "work"],
+         "amount": 23213,
+         "receipt": "https://www.img-url.com",
+         "remark": "Say something here about your recent purchase.",
+         "archive": false,
+         "meta": {
+            "color": "#ffff",
+            "icon": "💸"
+         }
+      }
+   ],
+   "wishlist": [
+      {
+         "id": 1,
+         "title": "Dream gaming chair",
+         "created_date": "12/12/11",
+         "category": "furniture",
+         "tags": ["hobby", "work"],
+         "amount": 23213,
+         "remark": "Say something here about your recent purchase.",
+         "archive": false,
+         "important": 5,
+         "meta": {
+            "color": "#ffff",
+            "icon": "💸"
+         }
+      }
+   ]
+}
