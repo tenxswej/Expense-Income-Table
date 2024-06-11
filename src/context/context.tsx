@@ -22,6 +22,8 @@ type InitialState = {
    setSearch: Dispatch<SetStateAction<string | null>>;
    searchField: string | null;
    setSearchField: Dispatch<SetStateAction<string | null>>;
+   sort: { field: "id" | "purchasedAmount" | "joined"; ascending: boolean };
+   setSort: Dispatch<SetStateAction<{ field: "id" | "purchasedAmount" | "joined"; ascending: boolean }>>;
 };
 
 const Context = createContext<InitialState | null>(null);
@@ -36,10 +38,14 @@ export function ContextProvider({ children }: any) {
 
    const [search, setSearch] = useState<string | null>(null);
    const [searchField, setSearchField] = useState<string | null>("name");
+   const [sort, setSort] = useState<{ field: "id" | "purchasedAmount" | "joined"; ascending: boolean }>({ field: "id", ascending: true });
 
    useEffect(() => {
       async function fetchData() {
-         const { data, message } = await fetcher(`${import.meta.env.VITE_BASE_URL}?_page=${currentPage}&_per_page=5}`);
+         const { data, message } = await fetcher(
+            `${import.meta.env.VITE_BASE_URL}?_sort=${sort.ascending ? sort.field : "-" + sort.field},&_page=${currentPage}&_per_page=5}`
+         );
+         
 
          if (data !== null) {
             setData(data.data);
@@ -53,7 +59,7 @@ export function ContextProvider({ children }: any) {
       if (search === "" || search === null) {
          fetchData();
       }
-   }, [currentPage, pages, search]);
+   }, [currentPage, pages, search, sort]);
 
    useEffect(() => {
       async function fetchData() {
@@ -77,7 +83,23 @@ export function ContextProvider({ children }: any) {
    }, [search, searchField]);
 
    return (
-      <Context.Provider value={{ data, setData, error, loading, currentPage, setCurrentPage, pages, search, setSearch, searchField, setSearchField }}>
+      <Context.Provider
+         value={{
+            data,
+            setData,
+            error,
+            loading,
+            currentPage,
+            setCurrentPage,
+            pages,
+            search,
+            setSearch,
+            searchField,
+            setSearchField,
+            sort,
+            setSort,
+         }}
+      >
          {children}
       </Context.Provider>
    );
